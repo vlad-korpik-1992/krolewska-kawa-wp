@@ -29,7 +29,7 @@
                             <a class="menu__link <?php if ( is_page_template('page-stocks.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(60)?>">Akcje</a>
                         </li>
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-contacts.php')) { echo 'menu__link--active'; }?>" href="#">Kontakty</a>
+                            <a class="menu__link <?php if ( is_page_template('page-contacts.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(74)?>">Kontakty</a>
                         </li>
                         <li class="menu__list__items menu__list__items--mobile">
                             <a class="header__btn__link" href="#">Zaloguj się</a>
