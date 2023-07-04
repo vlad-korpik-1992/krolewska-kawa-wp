@@ -548,10 +548,10 @@ section {
 .stocks__box__inner h2 {
     display: block;
     color: #4C2801;
-    font-size: 48px;
+    font-size: 40px;
     font-family: Spectral;
     font-weight: 600;
-    line-height: 60px;
+    line-height: 52px;
     padding-bottom: 16px;
 }
 
