@@ -1,40 +1,12 @@
-<?php
-/**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package Krolewska_kawa
- */
-
-get_header();
-?>
-
-	<main id="primary" class="site-main">
-
-		<?php
-		while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', get_post_type() );
-
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'krolewska-kawa' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'krolewska-kawa' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
-get_footer();
+<?php get_header('single');?>
+    <section class="article">
+        <div class="wrapper">
+            <div class="article__box">
+                <h1><?php single_post_title(); ?></h1>
+                <img src="<?php bloginfo('template_url'); ?>/assets/img/single-head.png" alt="<?php single_post_title(); ?>">
+                <?php echo wpautop(the_content());?>
+                <img class="article__box__img" src="<?php bloginfo('template_url'); ?>/assets/img/single-footer.png" alt="<?php single_post_title(); ?>">
+            </div>
+        </div>
+    </section>
+<?php get_footer();?>

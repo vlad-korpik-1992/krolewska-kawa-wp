@@ -1055,6 +1055,33 @@ section {
     display: none;
 }
 
+.error__box h2{
+    display: block;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 120%;
+    padding-bottom: 15px;
+}
+
+.error__btn{
+    display: flex;
+    flex: 0 0 320px;
+    max-width: 320px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px;
+    margin-top: 15px;
+    line-height: 24px;
+    background: #4C2801;
+    color: rgba(255, 255, 255, 0.99);
+    cursor: pointer;
+    transition: 0.3s all;
+}
+
+.error__btn:hover {
+    background-color: #A08351;
+}
+
 @media (min-width: 1510px) {
     .hero__box__about__inner {
         grid-template-columns: 155px auto;

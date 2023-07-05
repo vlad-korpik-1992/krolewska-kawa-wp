@@ -153,7 +153,7 @@ function krolewska_kawa_scripts() {
 
 	wp_enqueue_script( 'jquery' );
 
-	if ( is_page_template('page-single.php') || is_page_template('page-home.php')) {
+	if ( is_page_template('page-story.php') || is_page_template('page-home.php')) {
 		wp_enqueue_style( 'slick-style', get_template_directory_uri() . '/assets/css/slick.css', array());
 		wp_register_script( 'slick-script', get_template_directory_uri() . '/assets/js/slick.min.js', array(), null, true );
 

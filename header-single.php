@@ -20,16 +20,16 @@
                     </a>
                     <ul class="menu__list">
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-menu.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(36)?>">Menu</a>
+                            <a class="menu__link" href="<?php echo get_page_link(36)?>">Menu</a>
                         </li>
                         <li class="menu__list__items">
-                            <a class="menu__link" href="<?php echo get_page_link(80)?>">Podsumowania historyczne</a>
+                            <a class="menu__link <?php if ( is_page_template('page-story.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(80)?>">Podsumowania historyczne</a>
                         </li>
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-stocks.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(60)?>">Akcje</a>
+                            <a class="menu__link" href="<?php echo get_page_link(60)?>">Akcje</a>
                         </li>
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-contacts.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(74)?>">Kontakty</a>
+                            <a class="menu__link" href="<?php echo get_page_link(74)?>">Kontakty</a>
                         </li>
                         <li class="menu__list__items menu__list__items--mobile">
                             <a class="header__btn__link" href="#">Zaloguj się</a>
@@ -39,11 +39,6 @@
                 <div class="header__btn">
                     <a class="header__btn__link" href="#">Zaloguj się</a>
                 </div>
-            </div>
-            <div class="header__title">
-                <h1><?php single_post_title();  
-                    if(is_404()): echo 'Nie znaleziono strony';endif;
-                    if( is_post_type_archive() ) : wp_title("", true);endif?></h1>
             </div>
         </div>
     </header>
