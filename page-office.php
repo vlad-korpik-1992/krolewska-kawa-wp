@@ -26,23 +26,23 @@ get_header();
                         <?php wp_nonce_field( 'updateuser', 'updateuser_nonce' ) ?>
                         <div class="user__form__items">
                             <label class="user__form__label" for="surname">Nazwisko</label>
-                            <input class="user__form__text" type="text" name="surname" id="surname" value="">
+                            <input class="user__form__text" type="text" name="surname" id="surname" value="<?php the_author_meta( 'user_lastname', get_current_user_id() );?>">
                         </div>
                         <div class="user__form__items">
                             <label class="user__form__label" for="firstname">Imię</label>
-                            <input class="user__form__text" type="text" name="username" id="username" value="<?php echo $user_info->display_name ?>">
+                            <input class="user__form__text" type="text" name="username" id="username" value="<?php the_author_meta( 'user_firstname', get_current_user_id() );?>">
                         </div>
                         <div class="user__form__items">
                             <label class="user__form__label" for="phone">Numer telefonu</label>
-                            <input class="user__form__text" type="text" name="phone" id="phone" value="">
+                            <input class="user__form__text" type="text" name="phone" id="phone" value="<?the_field( 'phone_user', "user_" . get_current_user_id() );?>">
                         </div>
                         <div class="user__form__items">
                             <label class="user__form__label" for="email">Email</label>
-                            <input class="user__form__text" type="text" name="email" id="email" value="<?php echo $user_info->user_email ?>">
+                            <input class="user__form__text" type="text" disabled name="email" id="email" value="<?php echo $user_info->user_email ?>">
                         </div>
                         <div class="user__form__items--full">
                             <label class="user__form__label" for="address">Adres</label>
-                            <input class="user__form__text" type="text" name="address" id="address" value="">
+                            <input class="user__form__text" type="text" name="address" id="address" value="<?the_field( 'address_user', "user_" . get_current_user_id() );?>">
                         </div>
                         <div class="user__form__items">
                             <input type="hidden" name="userid" value="<?php echo get_current_user_id()?>">

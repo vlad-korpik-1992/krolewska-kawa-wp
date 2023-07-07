@@ -263,23 +263,10 @@ function updateuser() {
 	$address    = filter_input( INPUT_POST, 'address', FILTER_SANITIZE_STRING );
     // Validate fields...
 	wp_update_user( array( 'ID' => $user_id, 'first_name' => $username, 'last_name' => $surname ) );
+	update_user_meta($user_id, 'phone_user', $phone);
+	update_user_meta($user_id, 'address_user', $address);
 	$uri = get_page_link(161);
     wp_safe_redirect( $uri, 302 );
-}
-
-add_filter( 'manage_candidate_posts_columns', 'register_column' );
-add_action( 'manage_candidate_posts_custom_column', 'column_callback' );
-function register_column( array $columns ): array {
-    return array_slice( $columns, 0, 4 ) + [ 'phone' => 'Phone' ] + array_slice( $columns, 4 );
-}
-
-function column_callback( string $output, string $column_name, int $user_id ): string {
-    if ( 'phone' === $column_name ) {
-        $phone  = get_user_meta( $user_id, 'phone', true );
-        $output = '<a href="tel:' . $phone . '">' . $phone . '</a>';
-    }
-
-    return $output;
 }
 
 add_filter( 'show_admin_bar', function( $show) {
