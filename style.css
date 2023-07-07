@@ -694,6 +694,10 @@ section {
     gap: 30px;
 }
 
+.user__box--account{
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .user__box__items__link {
     display: block;
     color: #E9DFB9;
@@ -1046,8 +1050,7 @@ section {
 
 .hero__box__slider .slick-prev,
 .hero__box__slider .slick-next {
-    bottom: 130px;
-    top: unset;
+    top: 400px;
     z-index: 9;
 }
 
@@ -1055,7 +1058,7 @@ section {
     display: none;
 }
 
-.error__box h2{
+.error__box h2, .user__box--account h2{
     display: block;
     font-weight: 700;
     font-size: 32px;
@@ -1080,6 +1083,11 @@ section {
 
 .error__btn:hover {
     background-color: #A08351;
+}
+
+.auth-error{
+    font-weight: 700;
+    color: red;
 }
 
 @media (min-width: 1510px) {
@@ -1128,7 +1136,7 @@ section {
 
     .hero__box__slider__content a {
         font-size: 34px;
-        line-height: 75%;
+        line-height: 120%;
         padding-bottom: 15px;
     }
 }
@@ -1153,7 +1161,7 @@ section {
 
     .hero__box__slider .slick-prev,
     .hero__box__slider .slick-next {
-        bottom: 50px;
+        top: 300px;
     }
 
     .hero__box__slider__items {
@@ -1208,6 +1216,10 @@ section {
 
     .user__box {
         grid-template-columns: 40% repeat(2, 1fr);
+    }
+
+    .user__box--account{
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .header--home{
@@ -1294,6 +1306,7 @@ section {
 
     .hero__box__slider .slick-prev, .hero__box__slider .slick-next{
         bottom: -50px;
+        top: unset;
     }
 
     .hero__box__slider__items {

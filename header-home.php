@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="scroll--home">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +7,8 @@
     <?php wp_head(); ?>
     <title><?php wp_title("", true); ?></title>
 </head>
-<body>
-    <header class="header">
+<body class="body--scroll-home">
+    <header class="header header--home">
         <div class="wrapper">
             <div class="header__box">
                 <a class="logo" href="/">
@@ -20,16 +20,16 @@
                     </a>
                     <ul class="menu__list">
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-menu.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(36)?>">Menu</a>
+                            <a class="menu__link" href="<?php echo get_page_link(36)?>">Menu</a>
                         </li>
                         <li class="menu__list__items">
                             <a class="menu__link" href="<?php echo get_page_link(80)?>">Podsumowania historyczne</a>
                         </li>
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-stocks.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(60)?>">Akcje</a>
+                            <a class="menu__link" href="<?php echo get_page_link(60)?>">Akcje</a>
                         </li>
                         <li class="menu__list__items">
-                            <a class="menu__link <?php if ( is_page_template('page-contacts.php')) { echo 'menu__link--active'; }?>" href="<?php echo get_page_link(74)?>">Kontakty</a>
+                            <a class="menu__link" href="<?php echo get_page_link(74)?>">Kontakty</a>
                         </li>
                         <?if ( is_user_logged_in() ) :?>
                             <li class="menu__list__items">
@@ -44,11 +44,6 @@
                 <div class="header__btn">
                     <a class="header__btn__link" href="<?php echo get_page_link(161)?>">Zaloguj się</a>
                 </div>
-            </div>
-            <div class="header__title">
-                <h1><?php single_post_title();  
-                    if(is_404()): echo 'Nie znaleziono strony';endif;
-                    if( is_post_type_archive() ) : wp_title("", true);endif?></h1>
             </div>
         </div>
     </header>

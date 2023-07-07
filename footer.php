@@ -1,4 +1,4 @@
-    <footer class="footer">
+    <footer class="footer <?php if ( is_page_template('page-home.php')) { echo 'footer--home'; }?>">
         <div class="wrapper">
             <div class="footer__box">
                 <div class="footer__box__items">

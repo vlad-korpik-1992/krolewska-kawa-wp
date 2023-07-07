@@ -31,13 +31,18 @@
                         <li class="menu__list__items">
                             <a class="menu__link" href="<?php echo get_page_link(74)?>">Kontakty</a>
                         </li>
+                        <?if ( is_user_logged_in() ) :?>
+                            <li class="menu__list__items">
+                                <a class="menu__link" href="<?php echo site_url()?>?logout=yes">Wyjdź</a>
+                            </li>
+                        <?endif;?>
                         <li class="menu__list__items menu__list__items--mobile">
-                            <a class="header__btn__link" href="#">Zaloguj się</a>
+                            <a class="header__btn__link" href="<?php echo get_page_link(161)?>">Zaloguj się</a>
                         </li>
                     </ul>
                 </nav>
                 <div class="header__btn">
-                    <a class="header__btn__link" href="#">Zaloguj się</a>
+                    <a class="header__btn__link" href="<?php echo get_page_link(161)?>">Zaloguj się</a>
                 </div>
             </div>
         </div>

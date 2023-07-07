@@ -180,6 +180,115 @@ function krolewska_kawa_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
+function redirect_login_page() {  
+    $login_page  = home_url( '/wejscie-dla-klienta/' );  
+    $page_viewed = basename($_SERVER['REQUEST_URI']);  
+  
+    if( $page_viewed == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET') {  
+        wp_redirect($login_page);  
+        exit;  
+    }  
+}  
+
+add_action('init','redirect_login_page');
+
+function login_failed() {  
+    $login_page  = home_url( '/wejscie-dla-klienta/' );  
+    wp_redirect( $login_page . '?login=failed' );  
+    exit;  
+}  
+add_action( 'wp_login_failed', 'login_failed' );  
+  
+function verify_username_password( $user, $username, $password ) {  
+    $login_page  = home_url( '/wejscie-dla-klienta/' );  
+    if( $username == "" || $password == "" ) {  
+        wp_redirect( $login_page . "?login=empty" );  
+        exit;  
+    }  
+}  
+add_filter( 'authenticate', 'verify_username_password', 1, 3);
+
+add_filter( 'login_errors', function($errors){
+	global $errors;
+	$error_codes = $errors->get_error_codes();
+	if( in_array('incorrect_password', $error_codes) || (in_array('invalid_username', $error_codes)) ){
+		$error = '<strong>Ошибка:</strong> Неправильное имя пользователя или пароль';
+	}
+	return $error;
+});
+
+add_action( 'init', 'block_users' );
+
+function block_users() {
+     if ( 
+           is_admin() && 
+           ! current_user_can( 'administrator' ) &&
+           ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) 
+     ) {
+           wp_redirect( home_url() );
+           exit;
+     }
+}
+
+add_action( 'wp', 'registration' );
+function registration() {
+    $nonce = filter_input( INPUT_POST, 'registration_nonce', FILTER_SANITIZE_STRING );
+    if ( ! wp_verify_nonce( $nonce, 'registration' ) ) {
+        return;
+    }
+    $username = filter_input( INPUT_POST, 'username', FILTER_SANITIZE_STRING );
+    $password = filter_input( INPUT_POST, 'password', FILTER_SANITIZE_STRING );
+    $email    = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
+    // Validate fields...
+    $user = wp_create_user( $username, $password, $email );
+    if ( ! is_wp_error( $user ) ) {
+        wp_set_auth_cookie( $user, true ); // Авторизируем пользователя
+        $uri = get_page_link(161);
+        wp_safe_redirect( $uri, 302 ); // Редирект после входа на страницу
+    }
+}
+
+add_action( 'wp', 'updateuser' );
+function updateuser() {
+    $nonce = filter_input( INPUT_POST, 'updateuser_nonce', FILTER_SANITIZE_STRING );
+    if ( ! wp_verify_nonce( $nonce, 'updateuser' ) ) {
+        return;
+    }
+	$surname = filter_input( INPUT_POST, 'surname', FILTER_SANITIZE_STRING );
+    $username = filter_input( INPUT_POST, 'username', FILTER_SANITIZE_STRING );
+	$phone    = filter_input( INPUT_POST, 'phone', FILTER_SANITIZE_STRING );
+	$user_id =  filter_input( INPUT_POST, 'userid', FILTER_SANITIZE_STRING );
+    $email    = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
+	$address    = filter_input( INPUT_POST, 'address', FILTER_SANITIZE_STRING );
+    // Validate fields...
+	wp_update_user( array( 'ID' => $user_id, 'first_name' => $username, 'last_name' => $surname ) );
+	$uri = get_page_link(161);
+    wp_safe_redirect( $uri, 302 );
+}
+
+add_filter( 'manage_candidate_posts_columns', 'register_column' );
+add_action( 'manage_candidate_posts_custom_column', 'column_callback' );
+function register_column( array $columns ): array {
+    return array_slice( $columns, 0, 4 ) + [ 'phone' => 'Phone' ] + array_slice( $columns, 4 );
+}
+
+function column_callback( string $output, string $column_name, int $user_id ): string {
+    if ( 'phone' === $column_name ) {
+        $phone  = get_user_meta( $user_id, 'phone', true );
+        $output = '<a href="tel:' . $phone . '">' . $phone . '</a>';
+    }
+
+    return $output;
+}
+
+add_filter( 'show_admin_bar', function( $show) {
+    if (current_user_can( 'subscriber') ) {
+        return false;
+    }
+    return $show;
+} );
+
 add_action( 'wp_enqueue_scripts', 'krolewska_kawa_scripts' );
 
 /**
